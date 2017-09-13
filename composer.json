@@ -1,5 +1,5 @@
 {
-    "name": "garylocke/odbc-driver",
+    "name": "venpath/odbc-driver",
     "description": "Laravel 5.1 ODBC Driver",
     "keywords": ["odbc", "driver", "laravel", "5.1"],
     "authors": [
@@ -10,6 +10,14 @@
         {
             "name": "Cody Covey",
             "email": "ccovey14@gmail.com"
+        },
+	{
+            "name": "VenPath, Inc",
+            "email": "support@venpath.net"
+        },
+        {
+            "name": "Steve Eakin",
+            "email": "steve@venpath.net"
         }
     ],
     "require": {
