@@ -45,4 +45,18 @@ class ODBCDriverConnection extends Connection
 
 		return false;
 	}
+
+	function select($query, $bindings = Array()) {
+		try {
+			$return = parent::select($query, $bindings);
+		 } catch (\Exception $e) {
+			if (stristr($e->getMessage(), 'SQLSTATE[SL009]') !== false) {
+			  	// This is good, no worries.  It ran!           
+			} else {
+				throw $e;
+			}
+		}
+		
+		return $return;
+	}
 }
