@@ -7,6 +7,49 @@ use Illuminate\Database\Schema\Grammars\Grammar as SchemaGrammar;
 class ODBCDriverConnection extends Connection
 {
 	/**
+ 	* Run a select statement against snowflake.  It can't do PDO for now.
+ 	*
+ 	* @param  string  $query
+ 	* @return array
+	*/
+	public function snowflake($query)
+	{
+		return $this->run($query, [], function ($me, $query) {
+			if ($me->pretending()) {
+				return [];
+			}
+
+			// Set up a manual ODBC connection to Snowflake
+			$conn = odbc_connect($this->config['dsn'], $this->config['username'], $this->config['password']);
+
+			if (!$conn) {
+				throw new \Exception("Connection Failed: " . $conn);
+			}
+
+			$rs = odbc_exec($conn, $query);
+
+			$results = array();
+			
+			while($result = odbc_fetch_array($rs)) {
+				// Convert to an of array objects, since that's what happens natively in the framework.
+				$object = new \stdClass;
+
+				foreach ($result as $key => $value) {
+					$object->$key = $value;
+				}
+
+				$results[] = $object;
+			}
+			
+			odbc_close($conn);
+			
+			unset($object);
+
+			return $results;
+		});
+	}
+
+	/**
 	 * @return Query\Grammars\Grammar
 	 */
 	protected function getDefaultQueryGrammar()
