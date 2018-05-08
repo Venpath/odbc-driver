@@ -23,7 +23,6 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "ext-pdo_odbc": "*",
 	"laravel/framework": "5.1.*"
     },
     "autoload": {
