@@ -27,23 +27,13 @@ class ODBCDriverServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		try {
-			$this->app->bindShared('db.factory', function($app) {
-				return new ODBCDriverConnectionFactory($app);
-			});
+		$this->app->singleton('db.factory', function($app) {
+	                return new ODBCDriverConnectionFactory($app);
+       	        });
 
-			$this->app->bindShared('db', function($app) {
-				return new DatabaseManager($app, $app['db.factory']);
-			});
-		} catch (\Exception $e) {
-			$this->app->singleton('db.factory', function($app) {
-	                        return new ODBCDriverConnectionFactory($app);
-        	        });
-
-                	$this->app->singleton('db', function($app) {
-                        	return new DatabaseManager($app, $app['db.factory']);
-               	 	});
-		}
+               	$this->app->singleton('db', function($app) {
+	               	return new DatabaseManager($app, $app['db.factory']);
+        	});
 	}
 
 	/**
