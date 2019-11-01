@@ -1,7 +1,7 @@
 {
     "name": "venpath/odbc-driver",
-    "description": "Laravel 5.1 ODBC Driver.  Forked from: https://github.com/garylocke/odbc-driver",
-    "keywords": ["odbc", "driver", "laravel", "5.1"],
+    "description": "Laravel 6 ODBC Driver.  Forked from: https://github.com/garylocke/odbc-driver",
+    "keywords": ["odbc", "driver", "laravel", "6"],
     "homepage": "https://github.com/Venpath/odbc-driver",
     "authors": [
         {

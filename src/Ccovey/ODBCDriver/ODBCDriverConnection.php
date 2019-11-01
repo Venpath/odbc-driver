@@ -97,7 +97,7 @@ class ODBCDriverConnection extends Connection
 		return false;
 	}
 
-	function select($query, $bindings = Array()) {
+	function select($query, $bindings = Array(), $useReadPdo = true) {
 		try {
 			$return = parent::select($query, $bindings);
 		 } catch (\Exception $e) {
