@@ -15,8 +15,16 @@ class ODBCDriverConnection extends Connection
 	public function snowflake($query)
 	{
 		return $this->run($query, [], function ($me, $query) {
-			if ($me->pretending()) {
-				return [];
+			if (!is_string($me)) {
+				if ($me->pretending()) {
+					return [];
+				}
+			} else {
+				if ($this->pretending()) {
+					return [];
+				}
+
+				$query = $me;
 			}
 
 			// Set up a manual ODBC connection to Snowflake
